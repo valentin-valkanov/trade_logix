@@ -12,9 +12,9 @@ class HomeController extends AbstractController
     {
         $homepage = 'Hello Traders';
 
-        return new Response(
-            '<html><body>Homepage: '.$homepage.'</body></html>'
-        );
+        return $this->render('trade/homepage.html.twig', [
+            'homepage' => $homepage
+        ]);
     }
 
 }
