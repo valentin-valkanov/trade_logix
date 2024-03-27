@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     {
         $homepage = 'TradeLogix';
 
-        return $this->render('trade/homepage.html.twig', [
+        return $this->render('home/homepage.html.twig', [
             'homepage' => $homepage
         ]);
     }
