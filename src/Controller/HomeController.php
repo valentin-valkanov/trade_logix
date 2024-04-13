@@ -2,19 +2,35 @@
 
 namespace App\Controller;
 
+use App\Service\MessageGenerator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_homepage')]public function homepage(): Response
+    public function __construct(
+        private MessageGenerator $generator
+    )
+    {
+    }
+
+    #[Route('/', name: 'app_homepage')]
+    public function homepage(): Response
     {
         $homepage = 'TradeLogix';
+        $message = $this->printMessage();
 
         return $this->render('home/homepage.html.twig', [
-            'homepage' => $homepage
+            'homepage' => $homepage,
+            'message' => $message,
         ]);
+    }
+
+    public function printMessage(): string
+    {
+         $message = $this->generator->getHappyMessage();
+         return $message;
     }
 
 }
