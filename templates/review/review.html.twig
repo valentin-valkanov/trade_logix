@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reviews{% endblock %}
+
+{% block body %}
+    <h1>Reviews</h1>
+
+    {# Loop through fake review entries #}
+    {% for entry in reviewEntries %}
+        <div>
+            <h2>{{ entry.title }}</h2>
+            <p>{{ entry.body }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}

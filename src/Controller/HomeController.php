@@ -32,5 +32,4 @@ class HomeController extends AbstractController
          $message = $this->generator->getHappyMessage();
          return $message;
     }
-
 }

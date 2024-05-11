@@ -1,0 +1,18 @@
+{# templates/playbook/playbook.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Playbooks{% endblock %}
+
+{% block body %}
+    <h1>Playbooks</h1>
+
+    {# Loop through fake playbook entries #}
+    {% for entry in playbookEntries %}
+        <div>
+            <h2>{{ entry.title }}</h2>
+            <p>{{ entry.body }}</p>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
