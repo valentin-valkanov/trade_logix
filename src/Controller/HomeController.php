@@ -18,7 +18,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_homepage')]
     public function homepage(): Response
     {
-        $homepage = 'TradeLogix';
+        $homepage = 'Trade Logix';
         $message = $this->printMessage();
 
         return $this->render('home/homepage.html.twig', [

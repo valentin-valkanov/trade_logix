@@ -3,21 +3,26 @@
 {% block title %}Playbook{% endblock %}
 
 {% block body %}
-    <h1>Playbook</h1>
-
-    <form action="{{ path('app_home_storeplannedtrades') }}" method="post">
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" class="form-control" id="title" name="title" required>
+    <div id="showcase">
+        <h1>Write a Playbook</h1>
+        <p>Document your trading strategies and plans.</p>
     </div>
 
-    <div class="form-group">
-        <label for="body">Body:</label>
-        <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+    <div class="container">
+        <div class="form-container">
+            <form action="{{ path('app_home_storeplannedtrades') }}" method="post">
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="body">Body:</label>
+                    <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
     </div>
-
-    {# Add chart embedding here if needed #}
-
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
 {% endblock %}

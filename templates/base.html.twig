@@ -16,10 +16,36 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_homepage') }}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reviews
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('app_review_showplaybookform') }}">Write Review</a>
+                        <a class="dropdown-item" href="{{ path('app_review_showplaybook') }}">Past Reviews</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Playbooks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('app_home_showplaybookform') }}">Write Playbook</a>
+                        <a class="dropdown-item" href="{{ path('app_home_storeplannedtrades') }}">Past Playbooks</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
         {% block body %}{% endblock %}
+
         <script src="{{ asset('js/http_code.jquery.com_jquery-3.2.1.slim.js') }}"></script>
         <script src="{{ asset('js/http_cdnjs.cloudflare.com_ajax_libs_popper.js_1.11.0_umd_popper.js') }}"></script>
         <script src="{{ asset('js/http_maxcdn.bootstrapcdn.com_bootstrap_4.0.0_js_bootstrap.js') }}"></script>
     </body>
-
 </html>

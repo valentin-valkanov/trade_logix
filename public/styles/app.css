@@ -114,3 +114,46 @@ header nav {
 .card p {
     line-height: 1.6;
 }
+
+/* Styles for form containers */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto; /* Center the form and add some top/bottom margin */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for form inputs */
+.form-container .form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Adjust the title and body fields */
+.form-container input[type="text"] {
+    padding: 10px 15px;
+}
+
+.form-container textarea {
+    padding: 15px;
+    min-height: 200px;
+}
+
+/* Styles for submit button */
+.form-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #0056b3;
+}

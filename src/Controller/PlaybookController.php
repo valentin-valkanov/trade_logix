@@ -27,7 +27,7 @@ class PlaybookController extends AbstractController
         // Example: Process form data and save to database
 
         // Redirect back to the playbook form or display a success message
-        return $this->redirectToRoute('app_home_showplaybookform', ['saved']);
+        return $this->redirectToRoute('app_notebook_showplaybook', ['saved']);
     }
 
     #[Route('playbook/show', name: 'app_notebook_showplaybook')]
