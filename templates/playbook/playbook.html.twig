@@ -5,14 +5,19 @@
 {% block title %}Playbooks{% endblock %}
 
 {% block body %}
-    <h1>Playbooks</h1>
-
-    {# Loop through fake playbook entries #}
-    {% for entry in playbookEntries %}
-        <div>
-            <h2>{{ entry.title }}</h2>
-            <p>{{ entry.body }}</p>
+    <div class="container">
+        <header>
+            <div id="branding">
+                <h1>Playbooks</h1>
+            </div>
+        </header>
+        <div id="content">
+            {% for entry in playbookEntries %}
+                <div class="card">
+                    <h2>{{ entry.title }}</h2>
+                    <p>{{ entry.body }}</p>
+                </div>
+            {% endfor %}
         </div>
-        <hr>
-    {% endfor %}
+    </div>
 {% endblock %}

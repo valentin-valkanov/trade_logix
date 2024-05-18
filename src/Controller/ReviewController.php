@@ -28,7 +28,7 @@ class ReviewController extends AbstractController
         // Example: Process form data and save to database
 
         // Redirect back to the playbook form or display a success message
-        return $this->redirectToRoute('app_review_showplaybookform', ['saved successfully']);
+        return $this->redirectToRoute('app_review_showplaybook');
     }
 
     #[Route('review/show', name: 'app_review_showplaybook')]

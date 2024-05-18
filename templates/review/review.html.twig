@@ -3,14 +3,20 @@
 {% block title %}Reviews{% endblock %}
 
 {% block body %}
-    <h1>Reviews</h1>
 
-    {# Loop through fake review entries #}
-    {% for entry in reviewEntries %}
-        <div>
-            <h2>{{ entry.title }}</h2>
-            <p>{{ entry.body }}</p>
+    <div class="container">
+        <header>
+            <div id="branding">
+                <h1>Weekly Reviews</h1>
+            </div>
+        </header>
+        <div id="content">
+            {% for entry in reviewEntries %}
+                <div class="card">
+                    <h2>{{ entry.title }}</h2>
+                    <p>{{ entry.body }}</p>
+                </div>
+            {% endfor %}
         </div>
-        <hr>
-    {% endfor %}
+    </div>
 {% endblock %}
