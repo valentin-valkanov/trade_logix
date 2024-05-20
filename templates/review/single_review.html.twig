@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ review.title }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <header>
+            <div id="showcase">
+                <h1>{{ review.title }}</h1>
+            </div>
+        </header>
+        <div id="content">
+            <p>{{ review.body }}</p>
+            <a href="{{ path('app_review_showplaybook') }}" class="btn btn-secondary">Back to Reviews</a>
+        </div>
+    </div>
+{% endblock %}

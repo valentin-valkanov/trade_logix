@@ -9,6 +9,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ReviewController extends AbstractController
 {
+    private array $reviewEntries = [
+        1 => ['title' => 'Review W1', 'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],
+        2 => ['title' => 'Review W2', 'body' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+        // Add more fake entries as needed
+    ];
     #[Route('/review/form', name: 'app_review_showplaybookform')]
     public function showReviewForm():Response
     {
@@ -32,18 +37,24 @@ class ReviewController extends AbstractController
     }
 
     #[Route('review/show', name: 'app_review_showplaybook')]
-    public function showReview():Response
+    public function showReviewsList():Response
     {
-        // Generate fake playbook entries for demonstration
-        $reviewEntries = [
-            ['title' => 'Review W1', 'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],
-            ['title' => 'Review W2', 'body' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
-            // Add more fake entries as needed
-        ];
-
         // Render the playbook template and pass the fake data to it
         return $this->render('review/review.html.twig', [
-            'reviewEntries' => $reviewEntries,
+            'reviewEntries' => $this->reviewEntries,
+        ]);
+    }
+
+    #[Route('/review/{id}', name: 'app_review_show')]
+    public function showReviewById(int $id): Response
+    {
+
+        if(!array_key_exists($id, $this->reviewEntries)){
+            throw $this->createNotFoundException('The review does not exist');
+        }
+
+        return $this->render('review/review.html.twig', [
+            'review' => $this->reviewEntries[$id],
         ]);
     }
 }
