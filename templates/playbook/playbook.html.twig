@@ -14,7 +14,7 @@
         <div id="content">
             {% for entry in playbookEntries %}
                 <div class="card">
-                    <h2>{{ entry.title }}</h2>
+                    <h2><a href="{{ path('app_playbook_show', {'id': loop.index}) }}">{{ entry.title }}</a></h2>
                     <p>{{ entry.body }}</p>
                 </div>
             {% endfor %}

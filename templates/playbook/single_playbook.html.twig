@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ playbook.title }}{% endblock %}
+
+{% block body %}
+
+
+    <div id="showcase">
+        <h1>{{ playbook.title }}</h1>
+    </div>
+    <div class="container">
+
+        <div id="content">
+            <p>{{ playbook.body }}</p>
+            <a href="{{ path('app_notebook_showplaybook') }}" class="btn btn-secondary">Back to Playbooks</a>
+        </div>
+    </div>
+{% endblock %}

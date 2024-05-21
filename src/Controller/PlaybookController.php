@@ -10,6 +10,11 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class PlaybookController extends AbstractController
 {
+    private array  $playbookEntries = [
+        1=> ['title' => 'Playbook W1', 'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],
+        2=> ['title' => 'Playbook W2', 'body' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
+
+    ];
     #[Route('/playbook/form', name: 'app_home_showplaybookform')]
     public function showPlaybookForm():Response
     {
@@ -31,18 +36,22 @@ class PlaybookController extends AbstractController
     }
 
     #[Route('playbook/show', name: 'app_notebook_showplaybook')]
-    public function showPlaybook():Response
+    public function showPlaybookList():Response
     {
-        // Generate fake playbook entries for demonstration
-        $playbookEntries = [
-            ['title' => 'Playbook W1', 'body' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'],
-            ['title' => 'Playbook W2', 'body' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'],
-            // Add more fake entries as needed
-        ];
-
         // Render the playbook template and pass the fake data to it
         return $this->render('playbook/playbook.html.twig', [
-            'playbookEntries' => $playbookEntries,
+            'playbookEntries' => $this->playbookEntries,
+        ]);
+    }
+    #[Route('/playbook/{id}', name: 'app_playbook_show')]
+    public function showPlaybook(int $id): Response
+    {
+        if(!array_key_exists($id, $this->playbookEntries)){
+            throw $this->createNotFoundException('The playbook does not exist');
+        }
+
+        return $this->render('playbook/single_playbook.html.twig', [
+            'playbook' => $this->playbookEntries[$id]
         ]);
     }
 }

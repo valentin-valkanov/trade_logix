@@ -53,7 +53,7 @@ class ReviewController extends AbstractController
             throw $this->createNotFoundException('The review does not exist');
         }
 
-        return $this->render('review/review.html.twig', [
+        return $this->render('review/single_review.html.twig', [
             'review' => $this->reviewEntries[$id],
         ]);
     }
