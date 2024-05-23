@@ -10,7 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
@@ -18,7 +17,8 @@ class ReviewController extends AbstractController
 {
     public function __construct(
 
-        private EntityManagerInterface $entityManager, private CsrfTokenManagerInterface $csrfTokenManager)
+        private EntityManagerInterface $entityManager,
+        private CsrfTokenManagerInterface $csrfTokenManager)
     {
     }
 
@@ -34,6 +34,7 @@ class ReviewController extends AbstractController
     {
         // Get form data
         $title = $request->request->get('title');
+
         $body = $request->request->get('body');
 
         $review = new Review();
