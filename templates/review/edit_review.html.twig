@@ -1,12 +1,19 @@
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Edit Review{% endblock %}#}
+
+{#{% block body %}#}
+{#    <h1>Edit Review</h1>#}
+
+{#    {{ form_start(form) }}#}
+{#    {{ form_widget(form) }}#}
+{#    <button class="btn btn-primary">Save</button>#}
+{#    {{ form_end(form) }}#}
+{#{% endblock %}#}
 {% extends 'base.html.twig' %}
 
 {% block title %}Edit Review{% endblock %}
 
 {% block body %}
-    <h1>Edit Review</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">Save</button>
-    {{ form_end(form) }}
+    {% include 'review/form_review.html.twig' with {'form': form, 'title': 'Edit Review'} %}
 {% endblock %}

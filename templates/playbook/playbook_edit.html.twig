@@ -3,10 +3,5 @@
 {% block title %}Edit Playbook{% endblock %}
 
 {% block body %}
-    <h1>Edit Playbook</h1>
-
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-primary">Save</button>
-    {{ form_end(form) }}
+    {% include 'playbook/form_playbook.html.twig' with {'form': form, 'title': 'Edit Playbook'} %}
 {% endblock %}
