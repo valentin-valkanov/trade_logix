@@ -1,0 +1,29 @@
+{# templates/positions/create.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Position{% endblock %}
+
+{% block body %}
+    <div id="showcase">
+        <h1>Add Position</h1>
+        <p>Enter your trading position details below.</p>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-primary">Save</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            flatpickr('.datetime-picker', {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i:s",
+            });
+        });
+    </script>
+{% endblock %}
