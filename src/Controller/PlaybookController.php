@@ -43,10 +43,10 @@ class PlaybookController extends AbstractController
         $this->entityManager->flush();
 
         // Redirect back to the playbook form or display a success message
-        return $this->redirectToRoute('app_notebook_showplaybook', ['saved']);
+        return $this->redirectToRoute('app_show_all', ['saved']);
     }
 
-    #[Route('playbook/show', name: 'app_notebook_showplaybook')]
+    #[Route('playbook/show', name: 'app_show_all')]
     public function showPlaybookList():Response
     {
         $playbooks = $this->entityManager->getRepository(Playbook::class)->findAll();
@@ -82,7 +82,7 @@ class PlaybookController extends AbstractController
 
         $this->entityManager->remove($playbook);
         $this->entityManager->flush();
-        return $this->redirectToRoute('app_notebook_showplaybook');
+        return $this->redirectToRoute('app_show_all');
     }
 
     #[Route('/playbook/edit/{id}', name: 'app_playbook_edit')]

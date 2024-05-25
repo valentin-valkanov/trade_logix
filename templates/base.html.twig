@@ -30,13 +30,24 @@
                         <a class="dropdown-item" href="{{ path('app_review_showplaybook') }}">Past Reviews</a>
                     </div>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Playbooks
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="{{ path('app_home_showplaybookform') }}">Write Playbook</a>
-                        <a class="dropdown-item" href="{{ path( 'app_notebook_showplaybook') }}">Past Playbooks</a>
+                        <a class="dropdown-item" href="{{ path( 'app_show_all') }}">Past Playbooks</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Positions
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{ path('app_position_add') }}">Add</a>
+                        <a class="dropdown-item" href="{{ path( 'app_position_show_all') }}">Positions</a>
                     </div>
                 </li>
             </ul>
