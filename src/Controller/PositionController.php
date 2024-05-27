@@ -62,4 +62,18 @@ class PositionController extends AbstractController
         ]);
 
     }
+
+    #[Route('position/delete{id}', name:'app_position_delete', methods: ['POST'])]
+    public function deletePosition(Request $request, Position $position):Response
+    {
+        $token = $request->request->get('_token');
+        if(!$this->isCsrfTokenValid('delete' . $position->getId(), $token)){
+            throw $this->createAccessDeniedException('Invalid CSRF token');
+        }
+
+        $this->entityManager->remove($position);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_closed_position_show_all');
+    }
 }

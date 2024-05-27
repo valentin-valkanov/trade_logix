@@ -54,6 +54,10 @@
                 <td>{{ position.week }}</td>
                 <td>
                     <a href="{{ path('app_position_edit', {id: position.id}) }}" class="btn btn-secondary">Edit</a>
+                    <form method="post" action="{{ path('app_position_delete', {id: position.id}) }}" style="display:inline;">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ position.id) }}">
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
                 </td>
             </tr>
         {% endfor %}
