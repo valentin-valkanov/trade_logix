@@ -52,6 +52,9 @@
                 <td>{{ position.assetClass }}</td>
                 <td>{{ position.grade }}</td>
                 <td>{{ position.week }}</td>
+                <td>
+                    <a href="{{ path('app_position_edit', {id: position.id}) }}" class="btn btn-secondary">Edit</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

@@ -44,4 +44,22 @@ class PositionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Route('position/edit{id}', name: 'app_position_edit')]
+    public function editPosition(Request $request, Position $position): Response
+    {
+        $form = $this->createForm(PositionType::class, $position);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_closed_position_show_all');
+        }
+
+        return $this->render('position/edit_position_form.html.twig', [
+            'form' => $form->createView(),
+            'position' => $position
+        ]);
+
+    }
 }
