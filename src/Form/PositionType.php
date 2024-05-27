@@ -26,7 +26,9 @@ class PositionType extends AbstractType
             ->add('volume', NumberType::class)
             ->add('entry', NumberType::class)
             ->add('stopLoss', NumberType::class)
-            ->add('takeProfit', NumberType::class)
+            ->add('takeProfit', NumberType::class, [
+                'required' => false
+            ])
             ->add('exitTime', DateTimeType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy.MM.dd HH:mm:ss',
