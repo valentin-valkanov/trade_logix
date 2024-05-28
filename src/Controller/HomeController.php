@@ -12,7 +12,6 @@ class HomeController extends AbstractController
     public function __construct( private PositionRepository $positionRepository)
     {
     }
-
     #[Route('/', name: 'home')]
     public function index(): Response
     {
