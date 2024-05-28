@@ -12,13 +12,15 @@ class HomeController extends AbstractController
     public function __construct( private PositionRepository $positionRepository)
     {
     }
-    #[Route('/', name: 'home')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
         $positions = $this->positionRepository->findPositionsForCurrentWeek();
+        $openPositions = $this->positionRepository->findOpenPositions();
 
         return $this->render('home/index.html.twig', [
             'positions' => $positions,
+            'openPositions' => $openPositions,
         ]);
     }
 }

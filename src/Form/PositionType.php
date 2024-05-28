@@ -33,15 +33,20 @@ class PositionType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy.MM.dd HH:mm:ss',
                 'html5' => false,
+                'required' => false
             ])
-            ->add('exit', NumberType::class)
+            ->add('exit', NumberType::class,[
+                'required' => false
+            ])
             ->add('commission', NumberType::class)
             ->add('swap', NumberType::class)
             ->add('profit', NumberType::class)
             ->add('system', TextType::class)
             ->add('strategy', TextType::class)
             ->add('assetClass', TextType::class)
-            ->add('grade', TextType::class)
+            ->add('grade', TextType::class,[
+                'required' => false
+            ])
             ->add('week', NumberType::class)
         ;
     }

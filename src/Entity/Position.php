@@ -38,10 +38,10 @@ class Position
     #[ORM\Column(nullable: true)]
     private ?float $takeProfit = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $exitTime = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?float $exit = null;
 
     #[ORM\Column]
@@ -62,7 +62,7 @@ class Position
     #[ORM\Column(length: 255)]
     private ?string $assetClass = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $grade = null;
 
     #[ORM\Column]
@@ -174,7 +174,7 @@ class Position
         return $this->exitTime;
     }
 
-    public function setExitTime(\DateTimeInterface $exitTime): static
+    public function setExitTime(?\DateTimeInterface $exitTime): static
     {
         $this->exitTime = $exitTime;
 
@@ -186,7 +186,7 @@ class Position
         return $this->exit;
     }
 
-    public function setExit(float $exit): static
+    public function setExit(?float $exit): static
     {
         $this->exit = $exit;
 
@@ -270,7 +270,7 @@ class Position
         return $this->grade;
     }
 
-    public function setGrade(string $grade): static
+    public function setGrade(?string $grade): static
     {
         $this->grade = $grade;
 

@@ -41,4 +41,17 @@ class PositionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * Get open positions
+     *
+     * @return Position[]
+     */
+    public function findOpenPositions(): array
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.exitTime IS NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }
