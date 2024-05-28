@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div id="showcase">
+        <h1>Dashboard</h1>
+        <p>Positions for the current week</p>
+    </div>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Entry Time</th>
+            <th>Position</th>
+            <th>Symbol</th>
+            <th>Type</th>
+            <th>Volume</th>
+            <th>Entry</th>
+            <th>Stop</th>
+            <th>Take Profit</th>
+            <th>Exit Time</th>
+            <th>Exit</th>
+            <th>Commission</th>
+            <th>Swap</th>
+            <th>Profit</th>
+            <th>System</th>
+            <th>Strategy</th>
+            <th>Asset Class</th>
+            <th>Grade</th>
+            <th>Week</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for position in positions %}
+            <tr>
+                <td>{{ position.entryTime ? position.entryTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ position.position }}</td>
+                <td>{{ position.symbol }}</td>
+                <td>{{ position.type }}</td>
+                <td>{{ position.volume }}</td>
+                <td>{{ position.entry }}</td>
+                <td>{{ position.stopLoss }}</td>
+                <td>{{ position.takeProfit }}</td>
+                <td>{{ position.exitTime ? position.exitTime|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ position.exit }}</td>
+                <td>{{ position.commission }}</td>
+                <td>{{ position.swap }}</td>
+                <td>{{ position.profit }}</td>
+                <td>{{ position.system }}</td>
+                <td>{{ position.strategy }}</td>
+                <td>{{ position.assetClass }}</td>
+                <td>{{ position.grade }}</td>
+                <td>{{ position.week }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

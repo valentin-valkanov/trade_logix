@@ -16,28 +16,29 @@ class PositionRepository extends ServiceEntityRepository
         parent::__construct($registry, Position::class);
     }
 
-    //    /**
-    //     * @return Position[] Returns an array of Position objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Get positions for the current week
+     *
+     * @return Position[]
+     */
+    public function findPositionsForCurrentWeek(): array
+    {
+        $qb = $this->createQueryBuilder('p');
 
-    //    public function findOneBySomeField($value): ?Position
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $startOfWeek = new \DateTime();
+        $startOfWeek->setISODate((int)date('Y'), (int)date('W'));
+        $startOfWeek->setTime(0, 0, 0);
+
+        $endOfWeek = clone $startOfWeek;
+        $endOfWeek->modify('+6 days');
+        $endOfWeek->setTime(23, 59, 59);
+
+        return $qb
+            ->where('p.entryTime BETWEEN :startOfWeek AND :endOfWeek')
+            ->orWhere('p.exitTime BETWEEN :startOfWeek AND :endOfWeek')
+            ->setParameter('startOfWeek', $startOfWeek)
+            ->setParameter('endOfWeek', $endOfWeek)
+            ->getQuery()
+            ->getResult();
+    }
 }

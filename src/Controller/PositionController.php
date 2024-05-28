@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Position;
 use App\Form\PositionType;
+use App\Repository\PositionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -76,4 +77,5 @@ class PositionController extends AbstractController
 
         return $this->redirectToRoute('app_closed_position_show_all');
     }
+
 }

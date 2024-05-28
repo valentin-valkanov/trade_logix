@@ -2,34 +2,24 @@
 
 namespace App\Controller;
 
-use App\Service\MessageGenerator;
+use App\Repository\PositionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    public function __construct(
-        private MessageGenerator $generator
-    )
+    public function __construct( private PositionRepository $positionRepository)
     {
     }
 
-    #[Route('/', name: 'app_homepage')]
-    public function homepage(): Response
+    #[Route('/', name: 'home')]
+    public function index(): Response
     {
-        $homepage = 'Trade Logix';
-        $message = $this->printMessage();
+        $positions = $this->positionRepository->findPositionsForCurrentWeek();
 
-        return $this->render('home/homepage.html.twig', [
-            'homepage' => $homepage,
-            'message' => $message,
+        return $this->render('home/index.html.twig', [
+            'positions' => $positions,
         ]);
-    }
-
-    public function printMessage(): string
-    {
-         $message = $this->generator->getHappyMessage();
-         return $message;
     }
 }
