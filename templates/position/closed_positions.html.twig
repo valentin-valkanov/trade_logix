@@ -2,12 +2,19 @@
 
 {% block title %}Positions{% endblock %}
 
+  {% block stylesheets %}
+      {{ parent() }}
+      <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+      <link rel="stylesheet" href="{{ asset('styles/table-styles.css') }}">
+  {% endblock %}
+
 {% block body %}
     <div id="showcase">
         <h1>Positions</h1>
-        <p>List of all of the positions.</p>
+        <p>List of all positions</p>
     </div>
 
+{#    <div class="container">#}
     <table class="table">
         <thead>
         <tr>
@@ -63,4 +70,5 @@
         {% endfor %}
         </tbody>
     </table>
+{#    </div>#}
 {% endblock %}
