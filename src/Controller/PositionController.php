@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Position;
 use App\Form\PositionType;
-use App\Repository\PositionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,6 +34,7 @@ class PositionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->entityManager->persist($position);
             $this->entityManager->flush();
 
