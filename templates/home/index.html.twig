@@ -120,4 +120,38 @@
             </tbody>
         </table>
     </div>
+
+    <h4>Portfolio Heat</h4>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Day</th>
+                <th>Combined Risk (USD)</th>
+                <th>Combined Risk (%)</th>
+                <th>Total Open Positions</th>
+                <th>New Trades</th>
+                <th>Closed Trades</th>
+                <th>Closed PnL</th>
+                <th>Open PnL</th>
+                <th>Account</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Monday</td>
+                <td>{{ combinedRisk }}</td>
+                <td>{{ combinedRiskPercent }}</td>
+                <td>{{ totalOpenPositions }}</td>
+                <td>{{ newTrades }}</td>
+                <td>{{ closedTrades }}</td>
+                <td>{{ closedPnL }}</td>
+                <td>{{ account }}</td>
+            </tr>
+            <!-- Repeat for other days of the week if needed -->
+            </tbody>
+        </table>
+    </div>
+
 {% endblock %}
