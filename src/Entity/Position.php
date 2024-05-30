@@ -68,6 +68,9 @@ class Position
     #[ORM\Column]
     private ?int $week = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $dividend = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -285,6 +288,18 @@ class Position
     public function setWeek(int $week): static
     {
         $this->week = $week;
+
+        return $this;
+    }
+
+    public function getDividend(): ?float
+    {
+        return $this->dividend;
+    }
+
+    public function setDividend(?float $dividend): static
+    {
+        $this->dividend = $dividend;
 
         return $this;
     }

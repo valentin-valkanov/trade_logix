@@ -34,7 +34,8 @@ class PositionRepository extends ServiceEntityRepository
         $endOfWeek->setTime(23, 59, 59);
 
         return $qb
-            ->where('p.exitTime BETWEEN :startOfWeek AND :endOfWeek')
+            ->where('p.exitTime IS NOT NULL')
+            ->andWhere('p.exitTime BETWEEN :startOfWeek AND :endOfWeek')
             ->setParameter('startOfWeek', $startOfWeek)
             ->setParameter('endOfWeek', $endOfWeek)
             ->getQuery()

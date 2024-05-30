@@ -23,4 +23,14 @@ class HomeController extends AbstractController
             'openPositions' => $openPositions,
         ]);
     }
+
+    public function calculateReturnPerPeriod()
+    {
+
+    }
+
+    public function managePortfolioHeat()
+    {
+
+    }
 }
