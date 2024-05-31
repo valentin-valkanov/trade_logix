@@ -33,7 +33,6 @@ class HomeController extends AbstractController
         $account = $accountBalance + $closedPnL;
 
 
-
         return $this->render('home/index.html.twig', [
             'positions' => $positions,
             'openPositions' => $openPositions,

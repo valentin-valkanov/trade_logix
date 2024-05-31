@@ -11,7 +11,9 @@ private array $closedPositions;
 private array $openPositions;
 
 
-    public function __construct(private PositionRepository $positionRepository, private PipPerLotValueConstants $constants)
+    public function __construct(
+        private PositionRepository $positionRepository,
+        private PipPerLotValueConstants $constants)
     {
         $this->closedPositions = $this->positionRepository->findPositionsForCurrentWeek();
         $this->openPositions = $this->positionRepository->findOpenPositions();
@@ -21,7 +23,8 @@ private array $openPositions;
     {
         $combinedRisk = 0;
         foreach ($this->openPositions as $position){
-            $risk = abs(($position->getEntry() - $position->getStopLoss()) * $this->constants->findValueForInstrument($position->getSymbol()));
+            $value = $this->constants->findValueForInstrument($position->getSymbol());
+            $risk = abs(($position->getEntry() - $position->getStopLoss()) * $value);
             $combinedRisk += $risk;
         }
 

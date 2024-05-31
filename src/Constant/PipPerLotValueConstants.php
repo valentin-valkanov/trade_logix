@@ -6,15 +6,12 @@ use ReflectionClass;
 
 class PipPerLotValueConstants
 {
-
-
     public const US_STOCKS = 1;
     public const PLATINUM = 100;
-    public const BTCUSD = 1;
-
+    public const BTCUSD = 0.1;
     public const GOLD = 10;
 
-    public function findValueForInstrument(string $instrument): int
+    public function findValueForInstrument(string $instrument): float
     {
 
         $reflection = new ReflectionClass($this);
