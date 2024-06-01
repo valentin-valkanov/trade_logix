@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Service\PortfolioHeat;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,7 +16,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class SaveDailyMetricsCommand extends Command
 {
-    public function __construct(private PortfolioHeat $portfolioHeat)
+    public function __construct(
+        private PortfolioHeat $portfolioHeat,
+        private LoggerInterface $logger
+    )
     {
         parent::__construct();
     }
@@ -32,9 +36,11 @@ class SaveDailyMetricsCommand extends Command
         try {
             $this->portfolioHeat->saveDailyMetrics();
             $io->success('Daily portfolio heat metrics saved successfully.');
+            $this->logger->info('Daily portfolio heat metrics saved successfully.');
             return Command::SUCCESS;
         } catch (\Exception $e) {
             $io->error('An error occurred while saving daily metrics: ' . $e->getMessage());
+            $this->logger->info('An error occurred while saving daily metrics: ' . $e->getMessage());
             return Command::FAILURE;
         }
     }

@@ -26,3 +26,7 @@ services:
     App\Service\PortfolioHeat:
         public: true
 
+    App\Command\SaveDailyMetricsCommand:
+        arguments:
+            $logger: '@logger'
+
