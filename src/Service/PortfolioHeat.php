@@ -3,7 +3,9 @@
 namespace App\Service;
 
 use App\Constant\PipPerLotValueConstants;
+use App\Entity\PortfolioHeatMetrics;
 use App\Repository\PositionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PortfolioHeat
 {
@@ -13,7 +15,9 @@ private array $openPositions;
 
     public function __construct(
         private PositionRepository $positionRepository,
-        private PipPerLotValueConstants $constants)
+        private PipPerLotValueConstants $constants,
+        private EntityManagerInterface $entityManager
+    )
     {
         $this->closedPositions = $this->positionRepository->findPositionsForCurrentWeek();
         $this->openPositions = $this->positionRepository->findOpenPositions();
@@ -60,5 +64,32 @@ private array $openPositions;
         }
 
         return $floatingPnL;
+    }
+
+    public function saveDailyMetrics()
+    {
+        $account = 10000;
+        $combinedRisk = $this->findCombinedRisk();
+        $combinedRiskPercent = $this->findCombinedRiskPercent($account);
+        $totalOpenPositions = $this->findTotalOpenPositions();
+        $newTrades = count($this->positionRepository->findNewTrades());
+        $closedTrades = count($this->positionRepository->findPositionsForCurrentWeek());
+        $closedPnL = $this->getClosedPnL();
+        $openPnL = $this->getOpenPnL();
+        $account = $account + $closedPnL;
+
+        $metrics = new PortfolioHeatMetrics();
+        $metrics->setDate(new \DateTime());
+        $metrics->setCombinedRisk($combinedRisk);
+        $metrics->setCombinedRiskPercent($combinedRiskPercent);
+        $metrics->setTotalOpenPositions($totalOpenPositions);
+        $metrics->setNewTrades($newTrades);
+        $metrics->setClosedPositions($closedTrades);
+        $metrics->setClosedPnL($closedPnL);
+        $metrics->setOpenPnL($openPnL);
+        $metrics->setAccount($account);
+
+        $this->entityManager->persist($metrics);
+        $this->entityManager->flush();
     }
 }

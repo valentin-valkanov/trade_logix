@@ -14,7 +14,7 @@ class Position
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeInterface $entryTime = null;
 
     #[ORM\Column(length: 255)]
@@ -38,7 +38,7 @@ class Position
     #[ORM\Column(nullable: true)]
     private ?float $takeProfit = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private ?\DateTimeInterface $exitTime = null;
 
     #[ORM\Column(nullable: true)]
