@@ -30,3 +30,5 @@ services:
         arguments:
             $logger: '@logger'
 
+    App\Utils\DateUtils: ~
+

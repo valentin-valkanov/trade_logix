@@ -16,28 +16,41 @@ class PortfolioHeatMetricsRepository extends ServiceEntityRepository
         parent::__construct($registry, PortfolioHeatMetrics::class);
     }
 
-    //    /**
-    //     * @return PortfolioHeatMetrics[] Returns an array of PortfolioHeatMetrics objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findMetricsForCurrentWeek(): array
+    {
+        $qb = $this->createQueryBuilder('phm');
+        [$startOfWeek, $endOfWeek] = $this->getCurrentWeekRange();
 
-    //    public function findOneBySomeField($value): ?PortfolioHeatMetrics
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        return $qb
+            ->where('phm.date BETWEEN :startOfWeek AND :endOfWeek')
+            ->setParameter('startOfWeek', $startOfWeek)
+            ->setParameter('endOfWeek', $endOfWeek)
+            ->orderBy('phm.date', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByDate(\DateTimeInterface $date): ?PortfolioHeatMetrics
+    {
+        return $this->createQueryBuilder('phm')
+            ->andWhere('phm.date = :date')
+            ->setParameter('date', $date->format('Y-m-d'))
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public static function getCurrentWeekRange(): array
+    {
+        $startOfWeek = new \DateTime();
+        $startOfWeek->setISODate((int)date('Y'), (int)date('W'));
+        $startOfWeek->setTime(0, 0, 0);
+
+        $endOfWeek = clone $startOfWeek;
+        $endOfWeek->modify('+6 days');
+        $endOfWeek->setTime(23, 59, 59);
+
+        return [$startOfWeek, $endOfWeek];
+    }
+
+
 }

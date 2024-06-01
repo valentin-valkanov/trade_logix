@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PortfolioHeatMetricsRepository::class)]
+#[ORM\Table(name: 'portfolio_heat_metrics', uniqueConstraints: [new ORM\UniqueConstraint(columns: ['date'])])]
 class PortfolioHeatMetrics
 {
     #[ORM\Id]

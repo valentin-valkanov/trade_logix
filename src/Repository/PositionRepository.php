@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Position;
+use App\Utils\DateUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -51,7 +52,7 @@ class PositionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    private function getCurrentWeekRange(): array
+    public static function getCurrentWeekRange(): array
     {
         $startOfWeek = new \DateTime();
         $startOfWeek->setISODate((int)date('Y'), (int)date('W'));

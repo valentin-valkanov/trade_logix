@@ -2,7 +2,11 @@
 
 namespace App\Command;
 
+use App\Entity\PortfolioHeatMetrics;
+use App\Repository\PortfolioHeatMetricsRepository;
+use App\Repository\PositionRepository;
 use App\Service\PortfolioHeat;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +22,10 @@ class SaveDailyMetricsCommand extends Command
 {
     public function __construct(
         private PortfolioHeat $portfolioHeat,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
+        private EntityManagerInterface $entityManager,
+        private PortfolioHeatMetricsRepository $portfolioHeatMetricsRepository,
+        private PositionRepository $positionRepository,
     )
     {
         parent::__construct();
@@ -31,17 +38,20 @@ class SaveDailyMetricsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $date = new \DateTimeImmutable();
 
-        try {
-            $this->portfolioHeat->saveDailyMetrics();
-            $io->success('Daily portfolio heat metrics saved successfully.');
-            $this->logger->info('Daily portfolio heat metrics saved successfully.');
+        // Check if an entry for the current date already exists
+        $existingMetric = $this->portfolioHeatMetricsRepository->findByDate($date);
+
+        if ($existingMetric) {
+            $this->logger->info('Metrics for today already exist. No new entry created.');
             return Command::SUCCESS;
-        } catch (\Exception $e) {
-            $io->error('An error occurred while saving daily metrics: ' . $e->getMessage());
-            $this->logger->info('An error occurred while saving daily metrics: ' . $e->getMessage());
-            return Command::FAILURE;
         }
+
+        $this->portfolioHeat->saveDailyMetrics();
+
+        $this->logger->info('Daily metrics saved successfully.');
+
+        return Command::SUCCESS;
     }
 }

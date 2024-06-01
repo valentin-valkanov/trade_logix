@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Repository\PortfolioHeatMetricsRepository;
 use App\Repository\PositionRepository;
 use App\Service\PortfolioHeat;
+use App\Utils\DateUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -12,7 +14,9 @@ class HomeController extends AbstractController
 {
     public function __construct(
         private PositionRepository $positionRepository,
-        private PortfolioHeat $portfolioHeat
+        private PortfolioHeat $portfolioHeat,
+        private PortfolioHeatMetricsRepository $portfolioHeatMetricsRepository,
+        private DateUtils $dateUtils
     )
     {
     }
@@ -32,10 +36,24 @@ class HomeController extends AbstractController
         $openPnL = $this->portfolioHeat->getOpenPnL();
         $account = $accountBalance + $closedPnL;
 
+        $weeklyMetrics = $this->portfolioHeatMetricsRepository->findMetricsForCurrentWeek();
+        $weekRange = $this->dateUtils->getCurrentWeekRange();
+        [$startOfWeek, $endOfWeek] = $weekRange;
+
+        $metricsByDay = [];
+        for ($date = clone $startOfWeek; $date <= $endOfWeek; $date->modify('+1 day')) {
+            $metricsByDay[$date->format('Y-m-d')] = null;
+        }
+
+        foreach ($weeklyMetrics as $metric) {
+            $metricsByDay[$metric->getDate()->format('Y-m-d')] = $metric;
+        }
+
 
         return $this->render('home/index.html.twig', [
             'positions' => $positions,
             'openPositions' => $openPositions,
+            'metricsByDay' => $metricsByDay,
             'combinedRisk' => $combinedRisk,
             'combinedRiskPercent' => $combinedRiskPercent,
             'totalOpenPositions' => $totalOpenPositions,
